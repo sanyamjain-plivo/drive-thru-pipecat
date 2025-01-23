@@ -1,27 +1,9 @@
 # Plivo Chatbot
 
-This project is a FastAPI-based chatbot that integrates with Plivo to handle WebSocket connections and provide real-time communication. The project includes endpoints for starting a call and handling WebSocket connections.
-
-## Table of Contents
-
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Configure Plivo URLs](#configure-plivo-urls)
-- [Running the Application](#running-the-application)
-- [Usage](#usage)
-
-## Features
-
-- **FastAPI**: A modern, fast (high-performance), web framework for building APIs with Python 3.6+.
-- **WebSocket Support**: Real-time communication using WebSockets.
-- **CORS Middleware**: Allowing cross-origin requests for testing.
-- **Dockerized**: Easily deployable using Docker.
 
 ## Requirements
 
 - Python 3.10
-- Docker (for containerized deployment)
 - ngrok (for tunneling)
 - Plivo Account
 
@@ -40,12 +22,14 @@ This project is a FastAPI-based chatbot that integrates with Plivo to handle Web
    pip install -r requirements.txt
    ```
 
-3. **Create .env**:
-   Copy the example environment file and update with your settings:
+3. **update env**:
 
    ```sh
-   cp env.example .env
+   OPENAI_API_KEY=
+   DEEPGRAM_API_KEY=
+   PINECONE_API_KEY=
    ```
+   
 
 4. **Install ngrok**:
    Follow the instructions on the [ngrok website](https://ngrok.com/download) to download and install ngrok.
@@ -67,13 +51,6 @@ This project is a FastAPI-based chatbot that integrates with Plivo to handle Web
      - Ensure "HTTP POST" is selected
    - Click Save at the bottom of the page
 
-3. **Configure streams.xml**:
-   - Copy the template file to create your local version:
-     ```sh
-     cp templates/streams.xml.template templates/streams.xml
-     ```
-   - In `templates/streams.xml`, replace `<your server url>` with your ngrok URL (without `https://`)
-   - The final URL should look like: `wss://abc123.ngrok.io/ws`
 
 ## Running the Application
 
@@ -87,19 +64,6 @@ Choose one of these two methods to run the application:
 # Make sure you’re in the project directory and your virtual environment is activated
 python server.py
 ```
-
-### Using Docker (Option 2)
-
-1. **Build the Docker image**:
-
-   ```sh
-   docker build -t plivo-chatbot .
-   ```
-
-2. **Run the Docker container**:
-   ```sh
-   docker run -it --rm -p 8765:8765 plivo-chatbot
-   ```
 
 The server will start on port 8765. Keep this running while you test with Plivo.
 
